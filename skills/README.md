@@ -13,6 +13,7 @@ Skills are folders of instructions that Claude loads dynamically to improve perf
 | `code-review` | Comprehensive code review with structured output format |
 | `web-to-markdown` | Convert web pages to clean, well-structured markdown files |
 | `web-to-asciidoc` | Convert web pages to clean, well-structured AsciiDoc files |
+| `generate-api-document` | Generate API spec documents in AsciiDoc from controller code |
 
 ## Creating a New Skill
 

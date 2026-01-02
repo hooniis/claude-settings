@@ -1,0 +1,214 @@
+= API Documentation Template Title
+document subtitle;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:table-stripes: hover
+:sectanchors:
+:sectnums:
+:sectnumlevels: 2
+
+= Overview
+.본 문서는 {feature} API 연동하기 위한 문서입니다.
+[NOTE]
+
+--
+- API overall notes here.
+--
+
+[[server-list]]
+== API Server List
+
+.API Server List
+|===
+| Phase | Host | Description | IP
+
+| `DEVELOP (TEST)`
+| 별도 제공
+| 테스트 서버
+| 별도 제공
+
+| `PRODUCTION (REAL)`
+| 별도 제공
+| 운영 서버 (상용)
+| 별도 제공
+|===
+
+[[http-verbs]]
+== Http Verbs
+
+.HTTP 상태 코드를 정의 합니다.
+[NOTE]
+--
+`2xx` 외의 코드는 실패 응답이며, `406` 코드는 비즈니스 오류로 정의 합니다.
+--
+
+.Http Status Code
+[cols="2,3"]
+|===
+| Http Status code | 설명
+
+| `200 OK`
+| 요청이 성공적으로 처리 되었습니다.
+
+| `201 Created`
+| 요청이 성공적이었으며 그 결과로 새로운 리소스가 생성 되었습니다.
+
+| `400 Bad Request`
+| 잘못된 요청입니다.
+
+| `401 Unauthorized`
+| 미인증 상태입니다.
+
+| `403 Forbidden`
+| 인증 정보를 찾을 수 없습니다.
+
+| `404 Not Found`
+| 요청받은 리소스를 찾을 수 없습니다.
+
+| `*406 Not Acceptable`
+| #비즈니스 오류 입니다.#
+
+| `500 Internal Server Error`
+| 서버 오류.
+|===
+
+[[api-format]]
+== API Request / Response Format
+
+[NOTE]
+--
+- 모든 요청에 대한 응답은 *_Api Response Format_* 형식으로 구성됩니다.
+- 모든 요청의 인코딩 값은 *UTF-8* 로 설정해주셔야 합니다.
+- 모든 요청은 *JSON* 형식으로 해주셔야 하며, 모든 응답은 *JSON* 으로 응답합니다.
+- 응답 *데이터* 는 `data` 필드에 _Object_ 타입으로 구성되어 있으며 데이터가 없을 겨우 _null_ 일수 있습니다.
+- 응답 데이터에 #신규 필드가 추가 될수 있음을 염두하여 구현# 해주셔야 합니다.
+--
+
+= APIs
+
+[[feature]]
+== API Feature Title
+
+./api/v1/sample/+{sample}+
+[NOTE]
+--
+- API Feature Description Here.
+--
+
+=== Http Request
+
+.request sample
+[source,httprequest]
+----
+GET /api/v1/sample/{sample} HTTP/1.1
+Host: api.example.com
+Content-Type: application/json
+----
+
+// Path Parameters if any
+.Path Parameters
+|===
+|Path|Description
+
+|`sample`
+|샘플 파라미터 설명
+|===
+
+// Query Parameters if any
+// if required, set "true" in Required else empty
+.Query Parameters
+|===
+|Parameter|Required|Description
+
+|`sampleParam`
+|false
+|샘플 쿼리 파라미터 설명
+|===
+
+// Form Parameters if any
+.Form Parameters
+|===
+|Parameter|Format|Description
+
+|`sampleFormParam`
+|String
+|샘플 폼 파라미터 설명
+|===
+
+// Request Body if any
+// if required, set "true" in Required else empty
+.Request Fields
+|===
+|Path|Type|Required|Format|Description
+
+|`sampleField`
+|String
+|true
+|
+|샘플 요청 필드 설명
+|===
+
+* additional request details here.
+
+=== Http Response
+
+.response sample
+[source,httpresponse]
+----
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+  "code": "200",
+  "message": "Success",
+  "data": {
+    "string": "sampleValue",
+    "date": "2024-01-01T00:00:00",
+    "number": 12345,
+    "boolean": true,
+    "array": [
+      "sample1",
+      "sample2"
+    ],
+    "object": {
+        "key": "value"
+    }
+  }
+}
+----
+
+.Response Fields `data`
+|===
+|Path|Type|Format|Description
+
+|`string`|String| |샘플 문자열 필드 설명
+|`date`|String|`yyyy-MM-dd'T'HH:mm:ss`|샘플 날짜 필드 설명
+|`number`|Number| |샘플 숫자 필드 설명
+|`boolean`|Boolean| |샘플 불리언 필드 설명
+|`array`|Array| |샘플 배열 필드 설명
+|`object`|Object|  |샘플 오브젝트 필드 설명
+|===
+
+.Response Fields `data.object`
+|===
+|Path|Type|Format|Description
+
+|`key`|String| |샘플 오브젝트 내부 필드 설명
+|===
+
+= Codes
+
+// Define any code lists used in the API here.
+[[sample-codes]]
+== Sample Codes
+
+.Sample Code List
+[cols="2,3"]
+|===
+| Code | Description
+| `SAMPLE_CODE_1` | 샘플 코드 1 설명
+| `SAMPLE_CODE_2` | 샘플 코드 2 설명
+|===
+
