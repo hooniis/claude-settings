@@ -1,27 +1,88 @@
-# TypeScript Style & Best Practices
+# TypeScript Style Guide
 
-A pragmatic guide for writing clean, readable, and maintainable TypeScript code.
-
-> **Core Philosophy**: Simple is best. Write code that humans can understand. Don't over-engineer.
-
-Based on [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html).
+Strictly follows [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html).
 
 ---
 
 ## Table of Contents
 
-1. [Naming Conventions](#naming-conventions)
-2. [Source Organization](#source-organization)
+1. [Source Organization](#source-organization)
+2. [Naming Conventions](#naming-conventions)
 3. [Formatting](#formatting)
 4. [Type System](#type-system)
-5. [Clean Code Principles](#clean-code-principles)
-6. [OOP & SOLID (Pragmatically)](#oop--solid-pragmatically)
-7. [Functional Programming (Balanced)](#functional-programming-balanced)
-8. [Functions](#functions)
-9. [Classes](#classes)
-10. [Error Handling](#error-handling)
-11. [Testing](#testing)
-12. [Anti-Patterns to Avoid](#anti-patterns-to-avoid)
+5. [Functions](#functions)
+6. [Classes](#classes)
+7. [Control Structures](#control-structures)
+8. [Error Handling](#error-handling)
+9. [Disallowed Patterns](#disallowed-patterns)
+10. [Testing](#testing)
+
+---
+
+## Source Organization
+
+### File Structure Order
+
+Files MUST follow this structure in order:
+
+```typescript
+// 1. @fileoverview JSDoc (if applicable)
+
+// 2. Imports
+import {Injectable} from '@angular/core';
+import type {User} from './types';
+
+// 3. Implementation
+export class UserService { }
+```
+
+### Imports
+
+**Use named exports exclusively. Do NOT use default exports.**
+
+```typescript
+// GOOD
+export {UserService};
+export class UserService { }
+
+// BAD - never use default exports
+export default UserService;
+```
+
+**Use `import type` for type-only imports:**
+
+```typescript
+// GOOD
+import type {User, Order} from './types';
+import {UserService} from './services';
+
+// BAD
+import {User, Order} from './types';  // When only used as types
+```
+
+**Import styles:**
+
+```typescript
+// Use namespace imports for large APIs
+import * as fs from 'fs';
+
+// Use destructured imports for frequently used items
+import {map, filter} from 'lodash';
+
+// Use relative imports within projects
+import {User} from './models';  // Not absolute paths
+```
+
+### Exports
+
+```typescript
+// GOOD - named exports
+export {UserService};
+export {User, Admin} from './models';
+
+// BAD - default exports
+export default class UserService { }
+```
 
 ---
 
@@ -31,52 +92,46 @@ Based on [Google TypeScript Style Guide](https://google.github.io/styleguide/tsg
 
 | Type | Style | Example |
 |------|-------|---------|
-| Classes, Interfaces, Types, Enums | `UpperCamelCase` | `UserService`, `HttpClient` |
-| Variables, Functions, Methods | `lowerCamelCase` | `userName`, `calculateTotal()` |
-| Constants (global immutable) | `CONSTANT_CASE` | `MAX_RETRY_COUNT` |
-| Enum members | `CONSTANT_CASE` | `Status.ACTIVE` |
+| Classes, Interfaces, Types, Enums, Decorators, Type Parameters | `UpperCamelCase` | `UserService`, `HttpClient` |
+| Variables, Parameters, Functions, Methods, Properties | `lowerCamelCase` | `userName`, `calculateTotal()` |
+| Global constants, Enum values | `CONSTANT_CASE` | `MAX_COUNT`, `Status.ACTIVE` |
 
-### Examples
+### Identifiers
 
 ```typescript
-// Classes & Interfaces
-class UserRepository { }
-interface PaymentGateway { }
-type UserId = string;
+// Use descriptive names - avoid abbreviations
+// GOOD
+function calculateTotalPrice() { }
+const userRepository = new UserRepository();
 
-// Functions & Variables
-function processOrder() { }
-const userName = 'John';
-let orderCount = 0;
-
-// Constants
-const MAX_RETRY_COUNT = 3;
-const DEFAULT_TIMEOUT_MS = 5000;
-
-// Enums
-enum OrderStatus {
-  PENDING,
-  PROCESSING,
-  COMPLETED,
-}
+// BAD
+function calcTotPr() { }
+const usrRepo = new UserRepository();
 ```
 
-### Acronyms
+### Acronyms - Treat as Words
+
 ```typescript
-// Treat acronyms as words
-function loadHttpUrl() { }  // Not loadHTTPURL
-class XmlParser { }         // Not XMLParser
-const htmlContent = '';     // Not HTMLContent
+// GOOD
+function loadHttpUrl() { }
+class XmlParser { }
+const htmlContent = '';
+
+// BAD
+function loadHTTPURL() { }
+class XMLParser { }
+const HTMLContent = '';
 ```
 
 ### Avoid
-```typescript
-// Don't use underscores or prefixes
-let _privateVar;        // Bad
-let opt_value;          // Bad
-interface IUserService  // Bad: no 'I' prefix
 
-// Good
+```typescript
+// DO NOT use underscores or prefixes
+let _privateVar;        // BAD
+let opt_value;          // BAD
+interface IUserService  // BAD - no 'I' prefix
+
+// GOOD
 private privateVar;
 let value;
 interface UserService
@@ -84,75 +139,63 @@ interface UserService
 
 ---
 
-## Source Organization
-
-### File Structure Order
-```typescript
-// 1. Imports
-import { Injectable } from '@angular/core';
-import type { User } from './types';
-
-// 2. Constants
-const DEFAULT_PAGE_SIZE = 20;
-
-// 3. Types/Interfaces (if not in separate file)
-interface UserFilter {
-  name?: string;
-  active?: boolean;
-}
-
-// 4. Implementation
-export class UserService { }
-```
-
-### Import Guidelines
-```typescript
-// Use named exports (avoid default exports)
-export { UserService };           // Good
-export default UserService;       // Avoid
-
-// Use 'import type' for type-only imports
-import type { User, Order } from './types';
-import { UserService } from './services';
-
-// Prefer destructured imports for frequently used items
-import { map, filter, reduce } from 'lodash';
-
-// Use namespace imports for large APIs
-import * as fs from 'fs';
-```
-
-### File Naming
-```typescript
-// kebab-case for files
-user-service.ts
-order.types.ts
-payment-gateway.interface.ts
-```
-
----
-
 ## Formatting
 
-### Braces & Spacing
+### Indentation and Encoding
+
+- Use **spaces**, not tabs
+- UTF-8 encoding
+
+### Braces
+
+**ALWAYS use braces for control structures, even for single statements:**
+
 ```typescript
-// Always use braces, even for single statements
+// GOOD
 if (isValid) {
   return result;
 }
+
+// BAD
+if (isValid) return result;
+```
+
+### Horizontal Whitespace
+
+```typescript
+// Spaces around binary operators
+const sum = a + b;
+
+// NO space around range operator
+for (let i = 0; i < 10; i++) { }
 
 // Space after keywords
 if (condition) { }
 for (const item of items) { }
 while (running) { }
+
+// NO space before opening parenthesis in declarations
+function process() { }
+class User { }
 ```
 
 ### Strings
+
+**Use single quotes for ordinary strings:**
+
 ```typescript
-// Use single quotes for simple strings
+// GOOD
 const name = 'John';
 
-// Use template literals for interpolation or multi-line
+// BAD
+const name = "John";
+```
+
+**Use template literals for:**
+- String interpolation
+- Multi-line strings
+
+```typescript
 const greeting = `Hello, ${name}!`;
 const query = `
   SELECT *
@@ -162,15 +205,19 @@ const query = `
 ```
 
 ### Semicolons
+
+**ALWAYS use explicit semicolons. Do NOT rely on ASI.**
+
 ```typescript
-// Always use explicit semicolons
 const value = 42;
 function process() { }
 ```
 
-### Object & Array Formatting
+### Trailing Commas
+
+**Use trailing commas for multi-line:**
+
 ```typescript
-// Trailing commas for multi-line
 const user = {
   name: 'John',
   email: 'john@example.com',
@@ -189,23 +236,29 @@ const items = [
 ## Type System
 
 ### Type Inference
-```typescript
-// Let TypeScript infer obvious types
-const name = 'John';              // string inferred
-const count = 42;                 // number inferred
-const items = ['a', 'b', 'c'];    // string[] inferred
 
-// Annotate when not obvious or for clarity
+**Rely on inference for trivially inferred types:**
+
+```typescript
+// GOOD - let TypeScript infer
+const name = 'John';
+const count = 42;
+const items = ['a', 'b', 'c'];
+
+// GOOD - annotate when not obvious
 function processUser(user: User): ProcessedUser { }
 const config: AppConfig = loadConfig();
 ```
 
-### Prefer `unknown` over `any`
+### Use `unknown` Instead of `any`
+
+**Never use `any`. Use `unknown` for truly opaque values.**
+
 ```typescript
-// Bad: loses type safety
+// BAD
 function parse(input: any): any { }
 
-// Good: forces type checking
+// GOOD
 function parse(input: unknown): Result {
   if (typeof input === 'string') {
     return parseString(input);
@@ -215,8 +268,11 @@ function parse(input: unknown): Result {
 ```
 
 ### Interfaces vs Type Aliases
+
+**Prefer interfaces for object definitions:**
+
 ```typescript
-// Use interfaces for object shapes
+// GOOD - use interface for object shapes
 interface User {
   id: string;
   name: string;
@@ -226,45 +282,53 @@ interface User {
 // Use type aliases for unions, intersections, primitives
 type UserId = string;
 type Status = 'active' | 'inactive' | 'pending';
-type UserWithOrders = User & { orders: Order[] };
+type UserWithOrders = User & {orders: Order[]};
 ```
 
 ### Array Types
+
 ```typescript
 // Use T[] for simple types
 const names: string[] = [];
 const users: User[] = [];
 
-// Use Array<T> for complex types (readability)
+// Use Array<T> for complex types
 const handlers: Array<(event: Event) => void> = [];
 ```
 
 ### Nullability
+
+**Use optional fields, NOT `|undefined`:**
+
 ```typescript
-// Use optional properties
+// GOOD
 interface User {
   name: string;
-  nickname?: string;  // Good: optional
+  nickname?: string;
 }
 
-// Avoid union with undefined
+// BAD
 interface User {
-  nickname: string | undefined;  // Avoid
+  nickname: string | undefined;
 }
+```
 
-// Handle null/undefined early
+**Handle null/undefined near their source:**
+
+```typescript
 function processUser(user: User | null) {
   if (!user) {
     return null;
   }
-  // user is now User
   return transform(user);
 }
 ```
 
 ### Readonly
+
+**Mark non-reassigned properties as `readonly`:**
+
 ```typescript
-// Mark non-reassigned properties as readonly
 interface Config {
   readonly apiUrl: string;
   readonly timeout: number;
@@ -272,196 +336,19 @@ interface Config {
 
 class UserService {
   private readonly repository: UserRepository;
-
-  constructor(repository: UserRepository) {
-    this.repository = repository;
-  }
 }
 ```
 
----
+### Do NOT Use `{}`
 
-## Clean Code Principles
-
-### Write Self-Documenting Code
 ```typescript
-// Bad
-function calc(a: number, b: number) {
-  return a * b * 1.1;
-}
+// BAD
+let value: {};
 
-// Good
-function calculateTotalWithTax(price: number, quantity: number): number {
-  const subtotal = price * quantity;
-  const tax = subtotal * TAX_RATE;
-  return subtotal + tax;
-}
-```
-
-### Keep Functions Small & Focused
-```typescript
-// Bad: doing too much
-async function processOrder(order: Order) {
-  // validate (20 lines)
-  // calculate (15 lines)
-  // save (10 lines)
-  // notify (15 lines)
-}
-
-// Good: single responsibility
-async function processOrder(order: Order): Promise<ProcessedOrder> {
-  const validated = validateOrder(order);
-  const priced = calculateTotals(validated);
-  const saved = await orderRepository.save(priced);
-  await notificationService.sendConfirmation(saved);
-  return saved;
-}
-```
-
-### Avoid Deep Nesting
-```typescript
-// Bad
-function processUser(user: User | null) {
-  if (user) {
-    if (user.isActive) {
-      if (user.hasPermission('admin')) {
-        // logic here
-      }
-    }
-  }
-}
-
-// Good: early returns
-function processUser(user: User | null) {
-  if (!user) return;
-  if (!user.isActive) return;
-  if (!user.hasPermission('admin')) return;
-
-  // logic here
-}
-```
-
-### Comments: Explain Why, Not What
-```typescript
-// Bad: explains what (obvious)
-// Increment counter
-counter++;
-
-// Good: explains why (not obvious)
-// Reset after successful connection to prevent accumulated retries
-retryCount = 0;
-```
-
----
-
-## OOP & SOLID (Pragmatically)
-
-> Apply when they add value. Don't create abstractions for hypothetical future needs.
-
-### Single Responsibility
-```typescript
-// Good: focused class
-class OrderPriceCalculator {
-  calculate(order: Order): Money { }
-}
-
-// Simple case: function is fine
-function calculateOrderPrice(order: Order): number {
-  return order.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-}
-```
-
-### Dependency Injection
-```typescript
-// Good: injectable dependencies
-class UserService {
-  constructor(
-    private readonly userRepository: UserRepository,
-    private readonly emailService: EmailService,
-  ) { }
-}
-
-// Simple case: default values are fine
-class SimpleService {
-  constructor(
-    private readonly client: HttpClient = new HttpClient(),
-  ) { }
-}
-```
-
-### When NOT to Over-Engineer
-```typescript
-// Bad: interface for single implementation
-interface UserRepository { }
-class UserRepositoryImpl implements UserRepository { }
-
-// Good: just use the class
-class UserRepository { }
-
-// Rule: Wait for 2-3 real use cases before abstracting
-```
-
----
-
-## Functional Programming (Balanced)
-
-### Prefer Immutability
-```typescript
-// Use const by default
-const users = ['John', 'Jane'];
-
-// Use readonly for arrays that shouldn't change
-function processUsers(users: readonly User[]): void { }
-
-// Use spread for immutable updates
-const updated = { ...user, name: 'New Name' };
-const newItems = [...items, newItem];
-```
-
-### Array Methods
-```typescript
-// Good: readable chain
-const activeAdminEmails = users
-  .filter(user => user.isActive)
-  .filter(user => user.role === 'admin')
-  .map(user => user.email);
-
-// Don't over-chain: break into steps if complex
-const activeUsers = users.filter(user => user.isActive);
-const adminUsers = activeUsers.filter(user => user.role === 'admin');
-const emails = adminUsers.map(user => user.email);
-```
-
-### Avoid Over-Functional Code
-```typescript
-// Bad: too clever
-const result = items
-  .reduce((acc, item) => {
-    const key = item.category;
-    return { ...acc, [key]: [...(acc[key] || []), item] };
-  }, {} as Record<string, Item[]>);
-
-// Good: clear and readable
-const grouped = new Map<string, Item[]>();
-for (const item of items) {
-  const existing = grouped.get(item.category) || [];
-  grouped.set(item.category, [...existing, item]);
-}
-```
-
-### Pure Functions When Possible
-```typescript
-// Good: pure function, easy to test
-function calculateDiscount(price: number, percentage: number): number {
-  return price * (1 - percentage / 100);
-}
-
-// Avoid: side effects hidden in function
-function calculateDiscount(price: number, percentage: number): number {
-  logger.log('Calculating discount');  // Side effect
-  analytics.track('discount');          // Side effect
-  return price * (1 - percentage / 100);
-}
+// GOOD - use specific types
+let value: unknown;
+let value: Record<string, unknown>;
+let value: object;
 ```
 
 ---
@@ -469,14 +356,15 @@ function calculateDiscount(price: number, percentage: number): number {
 ## Functions
 
 ### Function Declarations vs Arrow Functions
+
 ```typescript
-// Use function declarations for top-level named functions
+// Use function declarations for named functions
 function processOrder(order: Order): ProcessedOrder { }
 
-// Use arrow functions for callbacks and inline functions
+// Use arrow functions for callbacks
 const activeUsers = users.filter(user => user.isActive);
 
-// Use arrow functions to preserve 'this'
+// Use arrow functions in nested contexts
 class UserService {
   private handleClick = () => {
     this.process();
@@ -485,30 +373,28 @@ class UserService {
 ```
 
 ### Parameters
-```typescript
-// Use default parameters
-function createUser(name: string, role: Role = Role.USER): User { }
 
-// Use rest parameters instead of arguments
+**Use default parameter initializers:**
+
+```typescript
+function createUser(name: string, role: Role = Role.USER): User { }
+```
+
+**Use rest parameters instead of `arguments`:**
+
+```typescript
 function sum(...numbers: number[]): number {
   return numbers.reduce((a, b) => a + b, 0);
 }
-
-// Use object parameters for many options
-function createRequest(options: {
-  url: string;
-  method?: string;
-  headers?: Record<string, string>;
-  timeout?: number;
-}): Request { }
 ```
 
 ### Return Types
+
 ```typescript
-// Annotate complex return types for clarity
+// Annotate complex return types
 function parseConfig(input: string): AppConfig { }
 
-// Let TypeScript infer simple returns
+// Let inference work for simple returns
 const double = (n: number) => n * 2;
 ```
 
@@ -516,7 +402,8 @@ const double = (n: number) => n * 2;
 
 ## Classes
 
-### Structure
+### Structure Order
+
 ```typescript
 class UserService {
   // 1. Static properties
@@ -541,8 +428,11 @@ class UserService {
 ```
 
 ### Parameter Properties
+
+**Use parameter properties to reduce boilerplate:**
+
 ```typescript
-// Use parameter properties to reduce boilerplate
+// GOOD
 class UserService {
   constructor(
     private readonly repository: UserRepository,
@@ -550,7 +440,7 @@ class UserService {
   ) { }
 }
 
-// Instead of
+// Verbose alternative - avoid
 class UserService {
   private readonly repository: UserRepository;
   private readonly emailService: EmailService;
@@ -563,18 +453,89 @@ class UserService {
 ```
 
 ### Visibility
+
+**Use TypeScript's `private`, NOT `#private` fields:**
+
 ```typescript
-// Use TypeScript's private, not #private
+// GOOD
 class Service {
-  private secret: string;  // Good
-  #secret: string;         // Avoid
+  private secret: string;
 }
 
-// Default to private, expose only what's needed
-class UserService {
-  private cache: Map<string, User>;
+// BAD - do not use #private
+class Service {
+  #secret: string;
+}
+```
 
-  public findUser(id: string): User | null { }
+**Do NOT access properties via `obj['property']` to bypass visibility.**
+
+### Static Members
+
+**Do NOT use classes as namespaces for static members:**
+
+```typescript
+// BAD - container class
+class Utils {
+  static formatDate() { }
+  static parseDate() { }
+}
+
+// GOOD - export functions directly
+export function formatDate() { }
+export function parseDate() { }
+```
+
+---
+
+## Control Structures
+
+### Equality
+
+**ALWAYS use `===` and `!==`.**
+
+**Exception: Use `== null` to check both null and undefined:**
+
+```typescript
+// GOOD
+if (value === 'active') { }
+if (count !== 0) { }
+
+// GOOD - exception for null check
+if (value == null) {
+  return defaultValue;
+}
+
+// BAD
+if (value == 'active') { }
+```
+
+### Loops
+
+**Prefer `for...of` for iterations:**
+
+```typescript
+// GOOD
+for (const item of items) { }
+
+// Use for...in only for dict-style objects with hasOwnProperty
+for (const key in obj) {
+  if (Object.prototype.hasOwnProperty.call(obj, key)) { }
+}
+```
+
+### Switch Statements
+
+**All switch statements MUST have a default case:**
+
+```typescript
+switch (status) {
+  case 'active':
+    return process();
+  case 'inactive':
+    return skip();
+  default:
+    throw new Error(`Unknown status: ${status}`);
 }
 ```
 
@@ -582,18 +543,23 @@ class UserService {
 
 ## Error Handling
 
-### Throw Only Error Objects
+### Throw Only Error Instances
+
+**Never throw primitives or arbitrary objects:**
+
 ```typescript
-// Bad: throwing primitives
+// BAD
 throw 'Something went wrong';
 throw 404;
+throw {message: 'error'};
 
-// Good: throw Error instances
+// GOOD
 throw new Error('Something went wrong');
 throw new NotFoundError(`User ${id} not found`);
 ```
 
 ### Custom Errors
+
 ```typescript
 class AppError extends Error {
   constructor(
@@ -613,38 +579,69 @@ class NotFoundError extends AppError {
 }
 ```
 
-### Result Pattern for Expected Failures
-```typescript
-type Result<T, E = Error> =
-  | { success: true; data: T }
-  | { success: false; error: E };
+### Catch Blocks
 
-function parseJson(input: string): Result<unknown> {
-  try {
-    return { success: true, data: JSON.parse(input) };
-  } catch (e) {
-    return { success: false, error: e as Error };
+```typescript
+// Assume caught values are Error types
+try {
+  await process();
+} catch (e) {
+  if (e instanceof SpecificError) {
+    handle(e);
   }
+  throw e;
 }
 
-// Usage
-const result = parseJson(input);
-if (result.success) {
-  console.log(result.data);
-} else {
-  console.error(result.error.message);
+// Non-empty catch blocks MUST have explanation
+try {
+  await process();
+} catch {
+  // Expected to fail during initialization, will retry
 }
 ```
 
-### Null Checks
+---
+
+## Disallowed Patterns
+
+### NEVER Use
+
+| Pattern | Replacement |
+|---------|-------------|
+| `var` | `const` / `let` |
+| `any` | `unknown` or specific types |
+| Default exports | Named exports |
+| `#private` fields | TypeScript `private` |
+| `new String()` / `new Boolean()` / `new Number()` | Primitive types |
+| `Array()` constructor | `[]` literal |
+| `Object()` constructor | `{}` literal |
+| `const enum` | `enum` |
+| `eval()` | Never |
+| `Function(string)` constructor | Never |
+| `with` statement | Never |
+
+### Type Assertions
+
+**Use `as Type` syntax, NOT angle brackets:**
+
 ```typescript
-// Use == null to check both null and undefined
-if (value == null) {
-  return defaultValue;
+// GOOD
+const user = value as User;
+
+// BAD
+const user = <User>value;
+```
+
+**Prefer runtime checks over assertions:**
+
+```typescript
+// GOOD
+if (value instanceof User) {
+  return value.name;
 }
 
-// Use strict equality for other comparisons
-if (status === 'active') { }
+// Use assertions only when necessary, with explanation
+const user = value as User;  // Safe: validated by schema above
 ```
 
 ---
@@ -652,6 +649,7 @@ if (status === 'active') { }
 ## Testing
 
 ### Descriptive Names
+
 ```typescript
 describe('UserService', () => {
   describe('findUser', () => {
@@ -662,11 +660,12 @@ describe('UserService', () => {
 ```
 
 ### Arrange-Act-Assert
+
 ```typescript
 it('should calculate correct total with discount', () => {
   // Arrange
   const order: Order = {
-    items: [{ price: 100, quantity: 2 }],
+    items: [{price: 100, quantity: 2}],
     discountPercent: 10,
   };
 
@@ -678,99 +677,19 @@ it('should calculate correct total with discount', () => {
 });
 ```
 
-### Test One Thing
-```typescript
-// Bad: testing multiple behaviors
-it('should validate and save user', () => { });
-
-// Good: separate tests
-it('should reject user with invalid email', () => { });
-it('should save valid user to repository', () => { });
-```
-
----
-
-## Anti-Patterns to Avoid
-
-### Over-Engineering
-```typescript
-// Bad
-interface StringProcessor { process(s: string): string; }
-class UpperCaseProcessor implements StringProcessor { }
-class ProcessorFactory { create(): StringProcessor { } }
-
-// Good
-function toUpperCase(s: string): string {
-  return s.toUpperCase();
-}
-```
-
-### Using `any`
-```typescript
-// Bad
-function process(data: any): any { }
-
-// Good
-function process<T>(data: T): ProcessedData<T> { }
-function process(data: unknown): Result { }
-```
-
-### God Classes
-```typescript
-// Bad
-class UserManager {
-  createUser() { }
-  sendEmail() { }
-  generateReport() { }
-  // ... 50 more methods
-}
-
-// Good: split by responsibility
-class UserService { }
-class EmailService { }
-class ReportGenerator { }
-```
-
-### Copy-Paste Code
-```typescript
-// Bad: duplicated validation
-function validateUser(user: User) { /* same logic */ }
-function validateAdmin(admin: Admin) { /* same logic */ }
-
-// Good: reusable
-interface HasContactInfo {
-  name: string;
-  email: string;
-}
-
-function validateContactInfo<T extends HasContactInfo>(entity: T): void {
-  if (!entity.name) throw new Error('Name required');
-  if (!entity.email) throw new Error('Email required');
-}
-```
-
-### Disallowed Patterns
-```typescript
-// Never use
-var x = 1;                    // Use const/let
-new String('foo');            // Use primitives
-eval('code');                 // Security risk
-with (obj) { }                // Deprecated
-```
-
 ---
 
 ## Summary
 
-| Do | Don't |
-|----|-------|
+| MUST | MUST NOT |
+|------|----------|
 | Use `const`/`let` | Use `var` |
 | Use `unknown` | Use `any` |
 | Use named exports | Use default exports |
-| Throw `Error` objects | Throw primitives |
-| Use strict equality `===` | Use loose equality `==` |
-| Write readable code | Write clever code |
-| Keep it simple | Over-engineer |
-| Abstract when needed | Abstract preemptively |
-
-> **Remember**: Code is read more often than written. Optimize for readability.
+| Use `===`/`!==` | Use `==`/`!=` (except null check) |
+| Use braces for control structures | Omit braces |
+| Use single quotes | Use double quotes |
+| Use explicit semicolons | Rely on ASI |
+| Use TypeScript `private` | Use `#private` |
+| Throw `Error` instances | Throw primitives |
+| Use `as Type` assertions | Use `<Type>` assertions |
