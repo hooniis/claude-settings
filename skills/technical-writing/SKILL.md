@@ -82,3 +82,7 @@ Step 1: 문서 유형 정하기 → Step 2: 정보 구조 만들기 → Step 3: 
 - 사용자가 특정 단계를 건너뛰고 싶다면 해당 단계를 생략할 수 있습니다.
 - 문서 초안이 이미 있는 경우 Step 2 부터 시작할 수 있습니다.
 - 구조가 확정된 문서는 Step 3 부터 시작할 수 있습니다.
+
+## References
+
+This skill was inspired by [Toss Technical Writing Guide](https://technical-writing.dev/overview.html).
