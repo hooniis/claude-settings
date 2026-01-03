@@ -14,6 +14,10 @@ Skills are folders of instructions that Claude loads dynamically to improve perf
 | `web-to-markdown` | Convert web pages to clean, well-structured markdown files |
 | `web-to-asciidoc` | Convert web pages to clean, well-structured AsciiDoc files |
 | `generate-api-document` | Generate API spec documents in AsciiDoc from controller code |
+| `technical-writing` | Complete technical writing process through 3 sequential steps |
+| `determining-document-type` | Step 1: Recommend appropriate document type based on goals and context |
+| `structuring-documentation` | Step 2: Guide information architecture for technical documents |
+| `refining-sentences` | Step 3: Refine sentences for clarity, conciseness, and natural Korean |
 
 ## Creating a New Skill
 

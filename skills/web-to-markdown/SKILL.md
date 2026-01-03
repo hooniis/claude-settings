@@ -15,8 +15,16 @@ Convert web page content into clean, readable markdown files.
 
 1. **Fetch the webpage** using WebFetch tool with the provided URL
 2. **Extract the main content** - focus on the article/documentation body, ignore navigation, footers, ads
-3. **Convert to markdown** following the format guidelines below
-4. **Save the file** with an appropriate filename based on the page title or content
+3. **Preserve the original language** - keep content in the source webpage's language by default
+4. **Convert to markdown** following the format guidelines below
+5. **Save the file** with an appropriate filename based on the page title or content
+
+### Language Handling
+
+- **Default behavior**: Preserve the original language of the web page content
+- **Translation**: Only translate to another language when the user explicitly requests it
+  - Example: "Convert to markdown in Korean" or "markdown으로 변환해줘"
+- When translating, maintain technical terms and code examples in their original form
 
 ### Markdown Conversion Rules
 

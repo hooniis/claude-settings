@@ -49,6 +49,22 @@ Custom skills for Claude Code automation.
 | Skill | Description |
 |-------|-------------|
 | `code-review` | Comprehensive code review with structured output format |
+| `web-to-markdown` | Convert web pages to clean, well-structured markdown files |
+| `web-to-asciidoc` | Convert web pages to clean, well-structured AsciiDoc files |
+| `generate-api-document` | Generate API spec documents in AsciiDoc from controller code |
+| `technical-writing` | Complete technical writing process through 3 sequential steps |
+| `determining-document-type` | Step 1: Recommend appropriate document type based on goals |
+| `structuring-documentation` | Step 2: Guide information architecture for documents |
+| `refining-sentences` | Step 3: Refine sentences for clarity and natural Korean |
+
+### Technical Writing Workflow
+
+```
+/technical-writing
+    ├── Step 1: /determining-document-type
+    ├── Step 2: /structuring-documentation
+    └── Step 3: /refining-sentences
+```
 
 ### Creating a New Skill
 
