@@ -11,6 +11,8 @@ Skills are folders of instructions that Claude loads dynamically to improve perf
 | Skill | Description |
 |-------|-------------|
 | `code-review` | Comprehensive code review with structured output format |
+| `committing-changes` | Create git commits following Conventional Commits format with Jira integration |
+| `creating-branch-from-jira` | Create git feature branches from Jira tickets |
 | `web-to-markdown` | Convert web pages to clean, well-structured markdown files |
 | `web-to-asciidoc` | Convert web pages to clean, well-structured AsciiDoc files |
 | `generate-api-document` | Generate API spec documents in AsciiDoc from controller code |
