@@ -19,9 +19,38 @@ $ARGUMENTS
    - Remove special characters and Korean text
    - Use only lowercase letters, numbers, and hyphens
 
-3. **Create the branch**
+3. **Ask user to confirm before creating branch**
+   - Show the Jira ticket info and proposed branch name
+   - Use `AskUserQuestion` tool to get user approval
+   - Wait for explicit confirmation before proceeding
+
+4. **Create the branch**
    - Run `git checkout -b {branch-name}` to create and switch to the new branch
    - Confirm the branch was created successfully
+
+---
+
+## Pre-Creation Confirmation
+
+**IMPORTANT: Always use `AskUserQuestion` tool before creating branch**
+
+1. Show the user:
+   - Jira ticket key and summary
+   - Proposed branch name
+
+2. Use `AskUserQuestion` tool with options like:
+   - "Create branch" - proceed with branch creation
+   - "Edit name" - let user modify the branch name
+   - "Cancel" - abort
+
+### Example Output Before Asking
+
+```markdown
+**Jira Ticket:** PROJ-123
+**Summary:** Add user authentication feature
+
+**Branch Name:** `feature/PROJ-123-add-user-auth`
+```
 
 ## Branch Naming Rules
 
