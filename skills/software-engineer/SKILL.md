@@ -70,6 +70,7 @@ Follow this iterative cycle for quality code:
 | Do | Don't |
 |----|-------|
 | Write readable code | Write clever code |
+| Write testable code | Write untestable code |
 | Keep it simple | Over-engineer |
 | Abstract when needed | Abstract preemptively |
 | Name things clearly | Use abbreviations |
