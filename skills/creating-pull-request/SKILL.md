@@ -19,17 +19,25 @@ $ARGUMENTS
    - Use `mcp__mcp-atlassian__jira_get_issue` to fetch ticket details if found
    - Include ticket summary in PR description
 
-3. **Draft PR content**
+3. **Fetch repository metadata**
+   - Run `gh label list` to get available labels
+   - Run `gh api repos/{owner}/{repo}/milestones` to get milestones
+   - Identify potential reviewers/assignees
+
+4. **Draft PR content**
    - Generate title from commits or Jira ticket
    - Create description with summary, changes, and Jira link
 
-4. **Ask user to confirm before creating**
-   - Show complete PR content (title, description, files changed)
-   - Use `AskUserQuestion` tool to select target branch and get approval
-   - Common target options: `main`, `develop`, `release/*`, or custom branch
+5. **Ask user to confirm PR details**
+   - Show drafted title and body
+   - Use `AskUserQuestion` tool to select:
+     - Target branch (`main`, `develop`, `release/*`)
+     - Labels (from repo labels)
+     - Assignees
+     - Milestone (if available)
    - Allow user to edit or cancel
 
-5. **Create the pull request**
+6. **Create the pull request**
    - Use `gh pr create` command with confirmed content
    - Return the PR URL to user
 
@@ -79,13 +87,13 @@ Examples:
 
 ## Pre-Creation Confirmation
 
-**IMPORTANT: Use `AskUserQuestion` tool to confirm PR and select target branch**
+**IMPORTANT: Use `AskUserQuestion` tool to confirm PR details**
 
 Show the user:
 - PR title
 - PR description (full content)
 - Source branch and files changed summary
-- Target branch selection
+- Available options for selection
 
 ### Example Output Before Asking
 
@@ -100,14 +108,37 @@ Show the user:
 
 **Description:**
 [Full PR description here]
+
+---
+
+**Available Labels:** bug, enhancement, documentation, feature
+**Available Milestones:** v1.0, v1.1, v2.0
 ```
 
 ### AskUserQuestion Options
 
-Use `AskUserQuestion` with target branch options:
+Use multiple `AskUserQuestion` calls to select:
+
+**1. Target Branch**
 - `main` - create PR to main branch
 - `develop` - create PR to develop branch
-- `release/*` - create PR to release branch (specify version)
+- `release/*` - create PR to release branch
+
+**2. Labels** (multiSelect: true)
+- Suggest relevant labels from repo
+- Common: `bug`, `enhancement`, `feature`, `documentation`
+
+**3. Assignees**
+- `None` - leave unassigned
+- `Me` - assign to current user
+- Custom - specify username
+
+**4. Milestone** (if available)
+- List available milestones from repo
+- `None` - no milestone
+
+**5. Final Confirmation**
+- `Create PR` - proceed with creation
 - `Edit` - modify PR content
 - `Cancel` - abort PR creation
 
@@ -188,6 +219,21 @@ git log main..HEAD --oneline
 # See file changes
 git diff main..HEAD --stat
 
+# List available labels
+gh label list --json name,description
+
+# List milestones
+gh api repos/{owner}/{repo}/milestones --jq '.[].title'
+
 # Create PR with gh cli
 gh pr create --base <target> --title "<title>" --body "<body>"
+
+# Create PR with labels, assignee, milestone
+gh pr create \
+  --base main \
+  --title "feat(auth): add OAuth2 login" \
+  --body "PR description" \
+  --label "enhancement,feature" \
+  --assignee "@me" \
+  --milestone "v1.0"
 ```
