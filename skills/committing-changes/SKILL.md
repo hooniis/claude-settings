@@ -1,6 +1,6 @@
 ---
 name: committing-changes
-description: Creates git commits following Conventional Commits format with optional Jira ticket integration. Analyzes changes, drafts commit message, and asks for user confirmation before committing. Use when user asks to commit changes.
+description: Creates git commits following Conventional Commits format with Jira ticket and GitHub issue integration. Analyzes changes, drafts commit message, and asks for user confirmation before committing. Use when user asks to commit changes.
 ---
 
 # Committing Changes
@@ -14,9 +14,11 @@ $ARGUMENTS
    - Run `git diff --staged` or `git diff` to understand the changes
    - Identify the type and scope of changes
 
-2. **Extract Jira ticket (if applicable)**
-   - Check current branch name for ticket pattern: `feature/TICKET-123-*`, `bugfix/TICKET-123-*`
-   - Use regex: `(TICKET|[A-Z]+-\d+)` to extract ticket number
+2. **Extract Jira ticket and GitHub issue (if applicable)**
+   - Check branch name for Jira ticket: `feature/TICKET-123-*`, `bugfix/TICKET-123-*`
+   - Check branch name for GitHub issue: `feature/123-*`, `fix/123-*`, `issue-123-*`
+   - Use `AskUserQuestion` to confirm ticket/issue numbers with user
+   - Options: detected number, enter different number, or none
 
 3. **Draft commit message**
    - Follow Conventional Commits format
@@ -83,16 +85,35 @@ $ARGUMENTS
 
 ## Pre-Commit Confirmation
 
-**IMPORTANT: Always use `AskUserQuestion` tool before committing**
+**IMPORTANT: Use `AskUserQuestion` tool at two points**
 
-1. Show the user:
-   - Changed files list with status (modified/new/deleted)
-   - Proposed commit message
+### 1. Confirm Ticket/Issue Reference
 
-2. Use `AskUserQuestion` tool with options like:
-   - "Commit" - proceed with the commit
-   - "Edit message" - let user modify the message
-   - "Cancel" - abort the commit
+If Jira ticket or GitHub issue detected from branch name:
+
+```markdown
+**Detected from branch:** `feature/PROJ-123-add-feature`
+
+**Jira Ticket:** PROJ-123
+**GitHub Issue:** (none detected)
+```
+
+Use `AskUserQuestion` with options:
+- `PROJ-123` - use detected Jira ticket
+- `#456` - use GitHub issue number
+- `None` - no ticket/issue reference
+- Custom - enter different number
+
+### 2. Confirm Commit
+
+Show the user:
+- Changed files list with status (modified/new/deleted)
+- Proposed commit message
+
+Use `AskUserQuestion` tool with options:
+- "Commit" - proceed with the commit
+- "Edit message" - let user modify the message
+- "Cancel" - abort the commit
 
 ### Example Output Before Asking
 
@@ -106,6 +127,43 @@ $ARGUMENTS
 <type>(<scope>): <description> [TICKET-123]
 
 <body if needed>
+```
+
+---
+
+## GitHub Issue Integration
+
+### Extract from Branch Name
+
+| Branch Pattern | Extracted Issue |
+|----------------|-----------------|
+| `feature/123-add-feature` | `#123` |
+| `fix/456-fix-bug` | `#456` |
+| `issue-789-description` | `#789` |
+
+### Verify Issue Exists
+
+```bash
+gh issue view 123 --json number,title,state
+```
+
+### Issue Reference in Footer
+
+```
+feat(auth): add OAuth2 login
+
+Implement OAuth2 authentication flow.
+
+Closes #123
+```
+
+### Multiple References
+
+```
+fix(cart): resolve quantity sync issue
+
+Fixes #123
+Refs #456
 ```
 
 ---
