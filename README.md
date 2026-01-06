@@ -52,6 +52,7 @@ Custom skills for Claude Code automation.
 
 | Skill | Description |
 |-------|-------------|
+| `software-engineer` | Senior engineer guidance using coding and review skills |
 | `code-review` | Comprehensive code review with structured output format |
 | `committing-changes` | Create git commits following Conventional Commits with Jira integration |
 | `creating-branch-from-jira` | Create git feature branches from Jira tickets |

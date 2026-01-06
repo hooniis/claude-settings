@@ -10,6 +10,7 @@ Skills are folders of instructions that Claude loads dynamically to improve perf
 
 | Skill | Description |
 |-------|-------------|
+| `software-engineer` | Senior engineer guidance using coding and review skills |
 | `code-review` | Comprehensive code review with structured output format |
 | `committing-changes` | Create git commits following Conventional Commits format with Jira integration |
 | `creating-branch-from-jira` | Create git feature branches from Jira tickets |
