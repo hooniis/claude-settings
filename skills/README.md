@@ -15,6 +15,7 @@ Skills are folders of instructions that Claude loads dynamically to improve perf
 | `creating-branch-from-jira` | Create git feature branches from Jira tickets |
 | `creating-pull-request` | Create GitHub pull requests with Jira ticket integration |
 | `creating-jira-issue` | Create Jira issues from user-provided context |
+| `creating-github-issue` | Create GitHub issues with repo labels and Jira integration |
 | `web-to-markdown` | Convert web pages to clean, well-structured markdown files |
 | `web-to-asciidoc` | Convert web pages to clean, well-structured AsciiDoc files |
 | `generate-api-document` | Generate API spec documents in AsciiDoc from controller code |
