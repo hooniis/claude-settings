@@ -1,5 +1,5 @@
 ---
-name: coding-typescript
+name: code-typescript
 description: Guides TypeScript development following Google TypeScript Style Guide. Enforces best practices for types, naming, formatting, and error handling. Use when writing or reviewing TypeScript code.
 ---
 

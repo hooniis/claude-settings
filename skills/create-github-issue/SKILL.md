@@ -1,5 +1,5 @@
 ---
-name: creating-github-issue
+name: create-github-issue
 description: Creates a GitHub issue from user-provided context. Suggests repo labels and uses AskUserQuestion for assignees, labels, and milestone. Adds Jira ticket info if applicable. Use when user wants to create a GitHub issue.
 ---
 

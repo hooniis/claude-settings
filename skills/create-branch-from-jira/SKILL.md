@@ -1,5 +1,5 @@
 ---
-name: creating-branch-from-jira
+name: create-branch-from-jira
 description: Creates a git feature branch based on a Jira ticket. Fetches ticket info using jira_get_issue tool and creates branch with format feature/{ticket-number}-{short-name}. Use when user wants to start work on a Jira ticket.
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: structuring-documentation
+name: structure-documentation
 description: Guides information architecture for technical documents including page structure, headings, overviews, and predictability. Use when organizing document structure or improving navigation.
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: creating-jira-issue
+name: create-jira-issue
 description: Creates a Jira issue from user-provided context. Uses AskUserQuestion to confirm project, issue type, assignee, and priority before creating. Use when user wants to create a new Jira ticket.
 ---
 

@@ -49,7 +49,7 @@ Follow this iterative cycle for quality code:
 - Get user approval before proceeding
 
 ### Step 2: Code
-- Use `/coding-kotlin` or `/coding-typescript` based on language
+- Use `/code-kotlin` or `/code-typescript` based on language
 - Follow language-specific best practices
 - Write clean, readable code
 
@@ -80,7 +80,7 @@ Follow this iterative cycle for quality code:
 ## Language-Specific Skills
 
 ### Kotlin
-Use `/coding-kotlin` skill for Kotlin development.
+Use `/code-kotlin` skill for Kotlin development.
 
 Key principles:
 - Leverage null safety (`?.`, `?:`, `let`)
@@ -88,7 +88,7 @@ Key principles:
 - Use Kotlin idioms (data classes, sealed classes, extension functions)
 
 ### TypeScript
-Use `/coding-typescript` skill for TypeScript development.
+Use `/code-typescript` skill for TypeScript development.
 
 Key principles:
 - Use `unknown` over `any`

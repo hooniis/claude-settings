@@ -1,5 +1,5 @@
 ---
-name: refining-sentences
+name: refine-sentences
 description: Refines technical writing at the sentence level for clarity, conciseness, and natural Korean expression. Use when editing or reviewing technical documentation.
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: creating-pull-request
+name: create-pull-request
 description: Creates a GitHub pull request with Jira ticket integration. Analyzes commits, extracts Jira info from branch name, and asks for user confirmation before creating PR. Use when user wants to create a pull request.
 ---
 

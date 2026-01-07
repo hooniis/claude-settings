@@ -1,5 +1,5 @@
 ---
-name: coding-kotlin
+name: code-kotlin
 description: Guides Kotlin development following Kotlin Coding Conventions. Enforces best practices for null safety, idioms, clean code, and pragmatic OOP. Use when writing or reviewing Kotlin code.
 ---
 

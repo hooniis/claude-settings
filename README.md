@@ -17,11 +17,11 @@ claude-settings/
 │   ├── kotlin.md
 │   ├── typescript.md
 │   └── commit.md
-├── skills/                 # Custom skills (11 skills)
+├── skills/                 # Custom skills (16 skills)
 │   ├── code-review/
-│   ├── committing-changes/
-│   ├── creating-branch-from-jira/
-│   ├── creating-pull-request/
+│   ├── commit-changes/
+│   ├── create-branch-from-jira/
+│   ├── create-pull-request/
 │   └── ...
 ├── templates/              # Reusable templates
 │   ├── skill-template.md
@@ -54,36 +54,36 @@ Custom skills for Claude Code automation.
 |-------|-------------|
 | `software-engineer` | Senior engineer guidance using coding and review skills |
 | `code-review` | Comprehensive code review with structured output format |
-| `committing-changes` | Create git commits following Conventional Commits with Jira integration |
-| `creating-branch-from-jira` | Create git feature branches from Jira tickets |
-| `creating-pull-request` | Create GitHub pull requests with Jira ticket integration |
-| `creating-jira-issue` | Create Jira issues from user-provided context |
-| `creating-github-issue` | Create GitHub issues with repo labels and Jira integration |
-| `coding-typescript` | TypeScript development following Google TypeScript Style Guide |
-| `coding-kotlin` | Kotlin development following Kotlin Coding Conventions |
+| `commit-changes` | Create git commits following Conventional Commits with Jira integration |
+| `create-branch-from-jira` | Create git feature branches from Jira tickets |
+| `create-pull-request` | Create GitHub pull requests with Jira ticket integration |
+| `create-jira-issue` | Create Jira issues from user-provided context |
+| `create-github-issue` | Create GitHub issues with repo labels and Jira integration |
+| `code-typescript` | TypeScript development following Google TypeScript Style Guide |
+| `code-kotlin` | Kotlin development following Kotlin Coding Conventions |
 | `web-to-markdown` | Convert web pages to clean, well-structured markdown files |
 | `web-to-asciidoc` | Convert web pages to clean, well-structured AsciiDoc files |
 | `generate-api-document` | Generate API spec documents in AsciiDoc from controller code |
 | `technical-writing` | Complete technical writing process through 3 sequential steps |
-| `determining-document-type` | Step 1: Recommend appropriate document type based on goals |
-| `structuring-documentation` | Step 2: Guide information architecture for documents |
-| `refining-sentences` | Step 3: Refine sentences for clarity and natural Korean |
+| `determine-document-type` | Step 1: Recommend appropriate document type based on goals |
+| `structure-documentation` | Step 2: Guide information architecture for documents |
+| `refine-sentences` | Step 3: Refine sentences for clarity and natural Korean |
 
 ### Git Workflow Skills
 
 ```
-/creating-branch-from-jira  → Create feature branch from Jira ticket
-/committing-changes         → Commit with Conventional Commits format
-/creating-pull-request      → Create PR with Jira integration
+/create-branch-from-jira  → Create feature branch from Jira ticket
+/commit-changes           → Commit with Conventional Commits format
+/create-pull-request      → Create PR with Jira integration
 ```
 
 ### Technical Writing Workflow
 
 ```
 /technical-writing
-    ├── Step 1: /determining-document-type
-    ├── Step 2: /structuring-documentation
-    └── Step 3: /refining-sentences
+    ├── Step 1: /determine-document-type
+    ├── Step 2: /structure-documentation
+    └── Step 3: /refine-sentences
 ```
 
 ### Creating a New Skill

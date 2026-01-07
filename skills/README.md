@@ -12,20 +12,20 @@ Skills are folders of instructions that Claude loads dynamically to improve perf
 |-------|-------------|
 | `software-engineer` | Senior engineer guidance using coding and review skills |
 | `code-review` | Comprehensive code review with structured output format |
-| `committing-changes` | Create git commits following Conventional Commits format with Jira integration |
-| `creating-branch-from-jira` | Create git feature branches from Jira tickets |
-| `creating-pull-request` | Create GitHub pull requests with Jira ticket integration |
-| `creating-jira-issue` | Create Jira issues from user-provided context |
-| `creating-github-issue` | Create GitHub issues with repo labels and Jira integration |
-| `coding-typescript` | TypeScript development following Google TypeScript Style Guide |
-| `coding-kotlin` | Kotlin development following Kotlin Coding Conventions |
+| `commit-changes` | Create git commits following Conventional Commits format with Jira integration |
+| `create-branch-from-jira` | Create git feature branches from Jira tickets |
+| `create-pull-request` | Create GitHub pull requests with Jira ticket integration |
+| `create-jira-issue` | Create Jira issues from user-provided context |
+| `create-github-issue` | Create GitHub issues with repo labels and Jira integration |
+| `code-typescript` | TypeScript development following Google TypeScript Style Guide |
+| `code-kotlin` | Kotlin development following Kotlin Coding Conventions |
 | `web-to-markdown` | Convert web pages to clean, well-structured markdown files |
 | `web-to-asciidoc` | Convert web pages to clean, well-structured AsciiDoc files |
 | `generate-api-document` | Generate API spec documents in AsciiDoc from controller code |
 | `technical-writing` | Complete technical writing process through 3 sequential steps |
-| `determining-document-type` | Step 1: Recommend appropriate document type based on goals and context |
-| `structuring-documentation` | Step 2: Guide information architecture for technical documents |
-| `refining-sentences` | Step 3: Refine sentences for clarity, conciseness, and natural Korean |
+| `determine-document-type` | Step 1: Recommend appropriate document type based on goals and context |
+| `structure-documentation` | Step 2: Guide information architecture for technical documents |
+| `refine-sentences` | Step 3: Refine sentences for clarity, conciseness, and natural Korean |
 
 ## Installing Skills
 
@@ -99,7 +99,7 @@ description: What this Skill does and when Claude should use it.
 #### `name` field:
 - Maximum 64 characters
 - Lowercase letters, numbers, and hyphens only
-- Use gerund form (verb + -ing): `reviewing-code`, `processing-pdfs`
+- Use imperative form (base verb): `review-code`, `process-pdfs`
 - Cannot contain: XML tags, "anthropic", "claude"
 
 #### `description` field:

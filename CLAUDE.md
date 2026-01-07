@@ -58,7 +58,7 @@ description: What this Skill does and when Claude should use it.
 **`name` field:**
 - Max 64 characters
 - Lowercase letters, numbers, hyphens only
-- Use gerund form: `reviewing-code`, `processing-pdfs`
+- Use imperative form: `review-code`, `process-pdfs`
 - Cannot contain: "anthropic", "claude"
 
 **`description` field:**

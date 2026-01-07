@@ -20,7 +20,7 @@ Step 1: 문서 유형 정하기 → Step 2: 정보 구조 만들기 → Step 3: 
 
 ### Step 1: 문서 유형 정하기
 
-`/determining-document-type` 스킬을 사용하여 문서 유형을 결정합니다.
+`/determine-document-type` 스킬을 사용하여 문서 유형을 결정합니다.
 
 **수집할 정보:**
 - 문서 목표
@@ -34,7 +34,7 @@ Step 1: 문서 유형 정하기 → Step 2: 정보 구조 만들기 → Step 3: 
 
 ### Step 2: 정보 구조 만들기
 
-`/structuring-documentation` 스킬을 사용하여 문서 구조를 설계합니다.
+`/structure-documentation` 스킬을 사용하여 문서 구조를 설계합니다.
 
 **수집할 정보:**
 - 문서 초안 또는 목차
@@ -48,7 +48,7 @@ Step 1: 문서 유형 정하기 → Step 2: 정보 구조 만들기 → Step 3: 
 
 ### Step 3: 문장 다듬기
 
-`/refining-sentences` 스킬을 사용하여 문장을 개선합니다.
+`/refine-sentences` 스킬을 사용하여 문장을 개선합니다.
 
 **수집할 정보:**
 - 개선이 필요한 문장 또는 문단
@@ -72,9 +72,9 @@ Step 1: 문서 유형 정하기 → Step 2: 정보 구조 만들기 → Step 3: 
 
 각 단계는 개별 스킬로도 사용할 수 있습니다:
 
-- `/determining-document-type` - 문서 유형만 결정
-- `/structuring-documentation` - 구조만 개선
-- `/refining-sentences` - 문장만 다듬기
+- `/determine-document-type` - 문서 유형만 결정
+- `/structure-documentation` - 구조만 개선
+- `/refine-sentences` - 문장만 다듬기
 
 ## Notes
 

@@ -1,5 +1,5 @@
 ---
-name: determining-document-type
+name: determine-document-type
 description: Helps determine the appropriate document type (Learning, Problem-solving, Reference, Explanation) based on reader intent. Use when starting a new technical document or restructuring existing documentation.
 ---
 

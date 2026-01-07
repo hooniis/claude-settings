@@ -1,5 +1,5 @@
 ---
-name: committing-changes
+name: commit-changes
 description: Creates git commits following Conventional Commits format with Jira ticket and GitHub issue integration. Analyzes changes, drafts commit message, and asks for user confirmation before committing. Use when user asks to commit changes.
 ---
 
