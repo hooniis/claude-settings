@@ -28,6 +28,25 @@ Key principles across all languages:
 - Do not duplicate code - write reusable code
 - Apply best practices flexibly based on context
 
+## Installing Skills
+
+Install skills and commands to `~/.claude/` using the cross-platform script:
+
+```bash
+# Install all skills and commands
+python scripts/manage-skills.py install
+
+# Check installation status
+python scripts/manage-skills.py status
+
+# Uninstall all skills and commands
+python scripts/manage-skills.py uninstall
+```
+
+**Options:**
+- `install -y`: Skip confirmation prompts
+- Supports Windows, macOS, and Linux
+
 ## Creating New Skills
 
 When creating a new skill:
