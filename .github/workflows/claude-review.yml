@@ -4,12 +4,13 @@ name: Claude Code PR Review with Progress Tracking
 # visual progress tracking for PR reviews, similar to v0.x agent mode.
 
 on:
-  pull_request:
+  pull_request_target:
     types: [opened, synchronize, ready_for_review, reopened]
 
 jobs:
   review-with-tracking:
     runs-on: ubuntu-latest
+    environment: pr-review  # Fork PR 보호를 위한 환경 (수동 승인 필요)
     permissions:
       contents: read
       pull-requests: write
