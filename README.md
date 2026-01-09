@@ -15,6 +15,8 @@ claude-settings/
 │   └── settings.local.json # Local overrides (gitignored)
 ├── commands/               # Slash commands (shortcuts)
 │   └── commit.md
+├── docs/                   # Documentation
+│   └── mcp-atlassian.md    # MCP server setup guides
 ├── rules/                  # Coding style guides
 │   ├── kotlin.md
 │   ├── typescript.md
@@ -131,7 +133,37 @@ See `commands/README.md` for detailed guide.
 | `commit-template.md` | [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) format |
 | `pr-template.md` | Pull request template with checklist |
 
-## Usage
+## MCP Servers
+
+MCP (Model Context Protocol) servers extend Claude Code with external integrations.
+
+| Server | Description | Guide |
+|--------|-------------|-------|
+| mcp-atlassian | Connect to Jira and Confluence | [docs/mcp-atlassian.md](docs/mcp-atlassian.md) |
+
+## Installation
+
+### Install Skills and Commands (Recommended)
+
+Install skills and commands by creating symbolic links to `~/.claude/`:
+
+```bash
+# Install all skills and commands
+./install-skills.sh
+
+# Uninstall all skills and commands
+./uninstall-skills.sh
+```
+
+**What gets installed:**
+- 16 skills → `~/.claude/skills/`
+- 6 commands → `~/.claude/commands/`
+
+**Benefits:**
+- Automatically available in all Claude Code sessions
+- Changes to this repo are immediately reflected
+- Easy to update by pulling latest changes
+- Clean uninstall removes all symlinks
 
 ### Copy to Your Project
 
