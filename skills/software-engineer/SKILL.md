@@ -1,6 +1,6 @@
 ---
 name: software-engineer
-description: Acts as a senior software engineer providing expert guidance on code quality, architecture, and best practices. Uses coding-kotlin, coding-typescript, and code-review skills. Use when writing production code or seeking engineering advice.
+description: Acts as a senior software engineer providing expert guidance on code quality, architecture, and best practices. Uses code-kotlin, code-typescript, code-spring, and code-review skills. Use when writing production code or seeking engineering advice.
 ---
 
 # Senior Software Engineer
@@ -49,7 +49,7 @@ Follow this iterative cycle for quality code:
 - Get user approval before proceeding
 
 ### Step 2: Code
-- Use `/code-kotlin` or `/code-typescript` based on language
+- Use `/code-kotlin`, `/code-typescript`, or `/code-spring` based on language/framework
 - Follow language-specific best practices
 - Write clean, readable code
 
@@ -94,6 +94,15 @@ Key principles:
 - Use `unknown` over `any`
 - Named exports only (no default exports)
 - Explicit style (braces, semicolons, single quotes)
+
+### Spring Boot
+Use `/code-spring` skill for Spring Boot development.
+
+Key principles:
+- Constructor injection (no field injection)
+- Layered architecture (Controller → Service → Repository)
+- Keep transactions small, avoid external I/O in transactions
+- Use `@ConfigurationProperties` for configuration
 
 ## Code Review
 
