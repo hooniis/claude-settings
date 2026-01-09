@@ -8,12 +8,28 @@ Claude Code skills, commands, and coding rules.
 - **18 ready-to-use skills** - No setup required
 - **Install once, use everywhere** - Symlinks to ~/.claude/
 
+## Quick Start with Claude Code
+
+```bash
+# 1. Clone (or fork and clone)
+git clone https://github.com/gykk16/claude-settings.git
+cd claude-settings
+
+# 2. Start Claude Code
+claude
+
+# 3. Ask Claude Code to install
+> Install all skills from this project
+
+# 4. Check available skills
+> List available skills with descriptions
+```
+
 ## Quick Start
 
 ```bash
-# 1. Clone or fork the repository
+# 1. Clone (or fork and clone)
 git clone https://github.com/gykk16/claude-settings.git
-# or fork via GitHub and clone your fork
 cd claude-settings
 
 # 2. Install skills and commands

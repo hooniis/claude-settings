@@ -8,12 +8,28 @@ Claude Code용 skills, commands, 코딩 규칙 모음.
 - **18개의 바로 쓰는 skills** - 별도 설정 없이 사용
 - **한 번 설치, 어디서나 사용** - ~/.claude/에 심볼릭 링크로 연결
 
+## Claude Code로 빠른 시작
+
+```bash
+# 1. 클론 (또는 포크 후 클론)
+git clone https://github.com/gykk16/claude-settings.git
+cd claude-settings
+
+# 2. Claude Code 실행
+claude
+
+# 3. Claude Code에게 설치 요청
+> 이 프로젝트의 모든 스킬 설치해줘
+
+# 4. 사용 가능한 스킬 확인
+> 사용 가능한 스킬 목록과 설명 알려줘
+```
+
 ## 빠른 시작
 
 ```bash
-# 1. 저장소 클론 또는 포크
+# 1. 클론 (또는 포크 후 클론)
 git clone https://github.com/gykk16/claude-settings.git
-# 또는 GitHub에서 포크 후 본인 저장소 클론
 cd claude-settings
 
 # 2. skills와 commands 설치
