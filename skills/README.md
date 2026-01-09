@@ -33,25 +33,28 @@ Skills are folders of instructions that Claude loads dynamically to improve perf
 
 Skills are installed to `~/.claude/skills/`. Choose one of the following methods:
 
-### Option 1: Symbolic Link (Recommended)
+### Option 1: Use Install Script (Recommended)
 
-Best for development or when you want skills to auto-update with the repo.
+Cross-platform script that creates symlinks for all skills and commands.
 
 ```bash
 # Clone the repository
 git clone https://github.com/your-username/claude-settings.git
 cd claude-settings
 
-# Create symlinks for all skills
-REPO_SKILLS="$(pwd)/skills"
-CLAUDE_SKILLS="$HOME/.claude/skills"
+# Install all skills and commands
+python scripts/manage-skills.py install
 
-for skill in "$REPO_SKILLS"/*/; do
-  skill_name=$(basename "$skill")
-  rm -rf "$CLAUDE_SKILLS/$skill_name"  # Remove if exists
-  ln -s "$skill" "$CLAUDE_SKILLS/$skill_name"
-  echo "Linked: $skill_name"
-done
+# Check installation status
+python scripts/manage-skills.py status
+
+# Uninstall all skills and commands
+python scripts/manage-skills.py uninstall
+```
+
+**Options:**
+```bash
+python scripts/manage-skills.py install -y  # Skip confirmation prompts
 ```
 
 ### Option 2: Copy Files

@@ -21,7 +21,9 @@ claude-settings/
 │   ├── kotlin.md
 │   ├── typescript.md
 │   └── commit.md
-├── skills/                 # Custom skills (16 skills)
+├── scripts/                # Installation scripts
+│   └── manage-skills.py    # Cross-platform installer
+├── skills/                 # Custom skills (18 skills)
 │   ├── code-review/
 │   ├── commit-changes/
 │   ├── create-branch-from-jira/
@@ -153,21 +155,30 @@ Install skills and commands by creating symbolic links to `~/.claude/`:
 
 ```bash
 # Install all skills and commands
-./install-skills.sh
+python scripts/manage-skills.py install
 
 # Uninstall all skills and commands
-./uninstall-skills.sh
+python scripts/manage-skills.py uninstall
+
+# Check installation status
+python scripts/manage-skills.py status
+```
+
+**Options:**
+```bash
+python scripts/manage-skills.py install -y  # Skip confirmation prompts
 ```
 
 **What gets installed:**
-- 16 skills → `~/.claude/skills/`
+- 18 skills → `~/.claude/skills/`
 - 6 commands → `~/.claude/commands/`
 
 **Benefits:**
+- Cross-platform (Windows, macOS, Linux)
 - Automatically available in all Claude Code sessions
 - Changes to this repo are immediately reflected
 - Easy to update by pulling latest changes
-- Clean uninstall removes all symlinks
+- Clean uninstall removes only symlinks from this repo
 
 ### Copy to Your Project
 

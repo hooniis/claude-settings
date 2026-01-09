@@ -7,7 +7,7 @@ description: Guides Java development following modern Java best practices. Enfor
 
 $ARGUMENTS
 
-For advanced usage, see [reference.md](reference/reference.md)
+For advanced usage, see [reference.md](reference/reference.md). For Spring development, use `code-spring` skill.
 
 ## Core Principles
 
@@ -17,6 +17,7 @@ For advanced usage, see [reference.md](reference/reference.md)
 2. **Immutability** - Prefer final, immutable collections, defensive copies
 3. **Java Idioms** - Records, sealed classes, streams, functional interfaces
 4. **Clean Code** - Self-documenting, small focused methods
+5. **Testable Code** - Constructor injection, avoid static, separate pure logic from side effects
 
 | Do | Don't |
 |----|-------|
