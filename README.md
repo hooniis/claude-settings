@@ -42,7 +42,7 @@ Language-specific style guides emphasizing clean, readable code.
 |----------|------|----------|
 | Kotlin | `rules/kotlin.md` | [Kotlin Coding Conventions](https://kotlinlang.org/docs/coding-conventions.html) |
 | TypeScript | `rules/typescript.md` | [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html) |
-| Java | `skills/code-java/` | Modern Java best practices (Java 8-25 LTS) |
+| Java | `rules/java.md` | Modern Java best practices (Java 8-25 LTS) |
 
 ### Core Principles
 
