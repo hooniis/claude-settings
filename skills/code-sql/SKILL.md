@@ -9,6 +9,20 @@ $ARGUMENTS
 
 For advanced usage, see [reference/reference.md](reference/reference.md)
 
+## Database Vendor Confirmation
+
+> **REQUIRED**: When user requests SQL query generation (DDL, DML, etc.), you MUST first ask about the database vendor using `AskUserQuestion` tool.
+
+Before writing any SQL, confirm the target database:
+
+```
+Use AskUserQuestion with:
+- Question: "Which database vendor are you using?"
+- Options: Oracle, MySQL, PostgreSQL, MariaDB, Other
+```
+
+This ensures vendor-specific syntax is correctly applied (e.g., `auto_increment` vs `serial`, `limit` vs `fetch first`, date functions, etc.).
+
 ## Core Principles
 
 > **Core Philosophy**: Use lowercase. Leading commas. Align keywords. Optimize for readability.
