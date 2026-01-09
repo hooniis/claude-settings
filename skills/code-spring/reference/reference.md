@@ -26,6 +26,10 @@ Business logic organization: service responsibilities, composition patterns, and
 
 Spring Data JPA: query methods, JPQL, projections, pagination, and custom repositories.
 
+### [JPA & Hibernate](jpa.md)
+
+Entity mapping, associations, fetch strategies, locking, specifications, and entity state management.
+
 ### [Transaction Management](transaction.md)
 
 Declarative transactions, propagation levels, rollback rules, and avoiding common pitfalls.

@@ -2,6 +2,8 @@
 
 Repository layer handles data access using Spring Data JPA.
 
+For JPA entity mapping, fetch strategies, and locking, see [jpa.md](jpa.md).
+
 ## Repository Principles
 
 > **Keep queries simple.** Use query methods for simple cases, JPQL for complex ones.
@@ -20,27 +22,7 @@ interface UserRepository : JpaRepository<User, Long> {
     // Inherited: save, findById, findAll, delete, count, existsById, etc.
 }
 
-@Entity
-class User(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0,
-
-    @Column(nullable = false)
-    var name: String,
-
-    @Column(nullable = false, unique = true)
-    var email: String,
-
-    @Enumerated(EnumType.STRING)
-    var status: UserStatus = UserStatus.ACTIVE,
-
-    @CreationTimestamp
-    val createdAt: LocalDateTime = LocalDateTime.now(),
-
-    @UpdateTimestamp
-    var updatedAt: LocalDateTime = LocalDateTime.now(),
-)
+// For entity definition, see jpa.md
 ```
 
 ## Query Methods
@@ -452,46 +434,6 @@ interface UserRepository : JpaRepository<User, Long> {
 }
 ```
 
-## EntityGraph
-
-Declarative way to specify fetch strategy.
-
-```kotlin
-@Entity
-@NamedEntityGraph(
-    name = "Order.withUserAndItems",
-    attributeNodes = [
-        NamedAttributeNode("user"),
-        NamedAttributeNode("items"),
-    ],
-)
-class Order(
-    @Id val id: Long = 0,
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    val user: User,
-
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
-    val items: List<OrderItem> = emptyList(),
-)
-
-interface OrderRepository : JpaRepository<Order, Long> {
-
-    // Use named entity graph
-    @EntityGraph("Order.withUserAndItems")
-    fun findWithGraphById(id: Long): Order?
-
-    // Ad-hoc entity graph
-    @EntityGraph(attributePaths = ["user", "items"])
-    fun findWithUserAndItemsById(id: Long): Order?
-
-    // With query
-    @EntityGraph(attributePaths = ["user"])
-    @Query("SELECT o FROM Order o WHERE o.status = :status")
-    fun findByStatusWithUser(@Param("status") status: OrderStatus): List<Order>
-}
-```
-
 ## Custom Repository
 
 For complex queries that need EntityManager.
@@ -565,101 +507,4 @@ interface UserRepository : JpaRepository<User, Long> {
 
 ## Common Patterns
 
-### Soft Delete
-
-```kotlin
-@Entity
-@Where(clause = "deleted_at IS NULL")  // Auto-filter deleted records
-class User(
-    @Id val id: Long = 0,
-    var name: String,
-    var deletedAt: LocalDateTime? = null,
-)
-
-interface UserRepository : JpaRepository<User, Long> {
-
-    // Automatically excludes soft-deleted due to @Where
-
-    // Include soft-deleted
-    @Query("SELECT u FROM User u WHERE u.id = :id")
-    fun findByIdIncludingDeleted(@Param("id") id: Long): User?
-
-    @Modifying
-    @Query("UPDATE User u SET u.deletedAt = :now WHERE u.id = :id")
-    fun softDelete(@Param("id") id: Long, @Param("now") now: LocalDateTime): Int
-}
-```
-
-### Auditing
-
-```kotlin
-@Entity
-@EntityListeners(AuditingEntityListener::class)
-class User(
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0,
-
-    var name: String,
-
-    @CreatedDate
-    var createdAt: LocalDateTime? = null,
-
-    @LastModifiedDate
-    var updatedAt: LocalDateTime? = null,
-
-    @CreatedBy
-    var createdBy: String? = null,
-
-    @LastModifiedBy
-    var updatedBy: String? = null,
-)
-
-@Configuration
-@EnableJpaAuditing
-class JpaConfig {
-
-    @Bean
-    fun auditorProvider(): AuditorAware<String> = AuditorAware {
-        Optional.ofNullable(SecurityContextHolder.getContext().authentication?.name)
-    }
-}
-```
-
-### Specification (Dynamic Queries)
-
-```kotlin
-interface UserRepository : JpaRepository<User, Long>, JpaSpecificationExecutor<User>
-
-object UserSpecifications {
-
-    fun hasName(name: String): Specification<User> =
-        Specification { root, _, cb ->
-            cb.like(cb.lower(root.get("name")), "%${name.lowercase()}%")
-        }
-
-    fun hasStatus(status: UserStatus): Specification<User> =
-        Specification { root, _, cb ->
-            cb.equal(root.get<UserStatus>("status"), status)
-        }
-
-    fun createdAfter(date: LocalDateTime): Specification<User> =
-        Specification { root, _, cb ->
-            cb.greaterThan(root.get("createdAt"), date)
-        }
-}
-
-// Usage
-@Service
-class UserService(private val userRepository: UserRepository) {
-
-    fun search(name: String?, status: UserStatus?, since: LocalDateTime?): List<User> {
-        var spec = Specification.where<User>(null)
-
-        name?.let { spec = spec.and(UserSpecifications.hasName(it)) }
-        status?.let { spec = spec.and(UserSpecifications.hasStatus(it)) }
-        since?.let { spec = spec.and(UserSpecifications.createdAfter(it)) }
-
-        return userRepository.findAll(spec)
-    }
-}
-```
+> For Soft Delete, Auditing, Specification, and EntityGraph patterns, see [jpa.md](jpa.md).
