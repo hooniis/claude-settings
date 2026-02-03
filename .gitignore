@@ -17,3 +17,14 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Plugin and session data
+.claude-plugin/
+.omc/
+**/.omc/
+__pycache__/
+**/__pycache__/
+
+# Compiled binaries
+skills/*/scripts/calendar-brief
+skills/*/scripts/mail-brief

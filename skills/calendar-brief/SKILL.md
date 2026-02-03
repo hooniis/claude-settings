@@ -65,8 +65,8 @@ Response status indicators (shown in the last column):
 ```
 ### 월 (2025-01-27)
 
-| | 시간 | 일정 | 장소 | 참석 |
-|--|------|------|------|------|
+| | 시간 | 일정 | 장소 | 응답 |
+|---|------|------|------|------|
 | 🔵 | All day | Friend's birthday | - | |
 | 🟠 | 09:00 - 10:00 | Team standup | - | ✅ |
 | 🟠 | 14:00 - 16:00 | Tech talk | Conference Room | ❓ |
@@ -75,16 +75,16 @@ Response status indicators (shown in the last column):
 #### Weekly View (this-week / next-week)
 
 ```
-### 월 (2025-01-27)
+### Mon (2025-01-27)
 
-| | 시간 | 일정 | 장소 | 참석 |
-|--|------|------|------|------|
+| | 시간 | 일정 | 장소 | 응답 |
+|---|------|------|------|------|
 | 🟠 | 09:00 - 10:00 | Team standup | - | ✅ |
 
-### 화 (2025-01-28)
+### Tue (2025-01-28)
 
-| | 시간 | 일정 | 장소 | 참석 |
-|--|------|------|------|------|
+| | 시간 | 일정 | 장소 | 응답 |
+|---|------|------|------|------|
 | 🔵 | All day | Anniversary | - | |
 | 🟠 | 14:00 - 15:00 | Design review | Meeting Room A | 🤔 |
 ```
@@ -92,7 +92,7 @@ Response status indicators (shown in the last column):
 ### Formatting Rules
 
 - **Account indicator**: 🔵 personal, 🟠 work — always shown as first column
-- **Response status**: ✅ accepted, ❌ declined, ❓ needsAction, 🤔 tentative, empty if no attendees — shown as last column
+- **Response status**: ✅ accepted, ❌ declined, ❓ needsAction, 🤔 tentative, (empty) if no attendees — shown as last column (header: 응답)
 - **All-day events**: Show as `All day` in the Time column, sorted before timed events
 - **No location**: Show `-` in the Location column
 - **Declined events** (`response: "declined"`): Keep in the brief but mark with ❌ (so user can see what they declined)
@@ -117,8 +117,8 @@ Output in Korean:
 
 ### 월 (2025-01-27)
 
-| | 시간 | 일정 | 장소 | 참석 |
-|--|------|------|------|------|
+| | 시간 | 일정 | 장소 | 응답 |
+|---|------|------|------|------|
 | 🟠 | 09:00 - 10:00 | 팀 스탠드업 | - | ✅ |
 | 🟠 | 14:00 - 15:00 | 스프린트 리뷰 | 회의실 A | ❓ |
 | 🔵 | 19:00 - 21:00 | 저녁 모임 | - | ✅ |
